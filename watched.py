@@ -1,4 +1,5 @@
 import csv 
+
 from dataclasses import dataclass
 @dataclass
 class Movie:
@@ -19,5 +20,8 @@ with open(watched, 'r') as csvfile:
 for row in rows:
     movies.append(Movie(row[0],row[1],row[2],row[3]))
 
-for movie in movies:
-    print(movie)
+def getMovieList():
+    return movies
+
+# for movie in movies:
+#     print(movie)
