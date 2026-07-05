@@ -1,6 +1,7 @@
 import csv 
-
+import io
 from dataclasses import dataclass
+
 @dataclass
 class Movie:
     date:str
@@ -8,20 +9,11 @@ class Movie:
     year:int
     url:str
 
-watched = "watched.csv"
-rows = []
-movies= []
-
-with open(watched, 'r') as csvfile:
-    csvReader = csv.reader(csvfile)
-    fields = next(csvReader)
+def getMovieList(file):
+    movies= []
+    content= file.getvalue().decode('utf-8')
+    csvReader = csv.reader(io.StringIO(content))
+    next(csvReader)
     for row in csvReader:
-        rows.append(row)
-for row in rows:
-    movies.append(Movie(row[0],row[1],row[2],row[3]))
-
-def getMovieList():
+        movies.append(Movie(row[0],row[1],int(row[2]),row[3]))
     return movies
-
-# for movie in movies:
-#     print(movie)
